@@ -27,6 +27,7 @@ def calculateWaveHeightML():
 def closure_depth():
     wave_height = request.form.get('wave_height')
     wave_period = request.form.get('wave_period')
+    print(request)
     print(wave_height, wave_period)
     closureDepth = ClosureDepth()
     return {"data": closureDepth.getClosureDepth(int(wave_height), int(wave_period))}
