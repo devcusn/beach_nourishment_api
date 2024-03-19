@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from services.wave_height import WaveHeight
 from services.wave_height_ml import WaveHeightML
 from services.closure_depth import ClosureDepth
@@ -23,7 +23,9 @@ def calculateWaveHeightML():
     return str(whML.getResult())
 
 
-@app.route('/api/clouse_depth')
+@app.route('/api/clouse_depth', methods=['POST'])
 def closure_depth():
+    wave_height = request.form.get('wave_height')
+    wave_period = request.form.get('wave_period')
     closureDepth = ClosureDepth()
-    return closureDepth.getClosureDepth(23, 23)
+    return {"data": closureDepth.getClosureDepth(int(wave_height), int(wave_period))}
