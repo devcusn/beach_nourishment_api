@@ -1,8 +1,11 @@
 from flask import Flask, request
+from services.territory import Territory
 from services.wave_height import WaveHeight
 from services.wave_height_ml import WaveHeightML
 from services.closure_depth import ClosureDepth
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/")
@@ -23,10 +26,32 @@ def calculateWaveHeightML():
     return str(whML.getResult())
 
 
-@app.route('/api/clouse_depth', methods=['POST'])
+@app.route('/api/closure_depth', methods=['POST'])
 def closure_depth():
+    # data
     data = request.get_json()
     wave_height = float(data['wave_height'])
     wave_period = float(data['wave_period'])
-    closureDepth = ClosureDepth()
-    return {"data": closureDepth.getClosureDepth(int(wave_height), int(wave_period))}
+    D = float(data['D'])
+    dfifthy = float(data['dfifthy'])
+    rho = float(data['rho'])
+    # ClosureDepth class
+    closureDepth = ClosureDepth({
+        "wave_height": wave_height,
+        "wave_period": wave_period,
+        "D": D,
+        "dfifthy": dfifthy,
+        "rho": rho,
+    })
+    res = closureDepth.res()
+    coords = [
+        [0, 0, 0],
+        [res['x'], 0, 0],
+        [0, -1*res['closure_depth'], 0]
+    ]
+
+    territory = Territory(coords, res['A'])
+    result = territory.get_territory_matris()
+    res['matris'] = result
+    # return response
+    return {"data": res}

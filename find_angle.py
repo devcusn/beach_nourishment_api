@@ -3,7 +3,7 @@ import numpy as np
 import math
 
 # Load image
-image = cv2.imread('triangle4.png')
+image = cv2.imread('triangle2.jpeg')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # Preprocess (if necessary)
