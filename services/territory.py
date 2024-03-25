@@ -1,4 +1,3 @@
-import math
 
 
 class Territory:
@@ -7,7 +6,7 @@ class Territory:
         self.A = A
 
     def point_position_relative_to_line(self, point, y):
-        y_on_line = -0.9 * math.pow(point[0], 2 / 3) + y
+        y_on_line = -1 * self.A * pow(point[0], 2 / 3) + y
         if point[1] == 0:
             return "Below"
         elif point[1] < y_on_line:
