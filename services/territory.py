@@ -17,7 +17,7 @@ class Territory:
             return "On"
 
     def generate_inside_coordinates(self, coordinates, y):
-        z_coord = -4
+        z_coord = -9
         c1 = coordinates[1]
         c2 = coordinates[2]
         coords = []
