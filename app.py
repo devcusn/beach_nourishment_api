@@ -13,11 +13,6 @@ def hello_api():
     return "<p>Hello, welcome to beach nourishment api</p>"
 
 
-@app.route("/pelinsu")
-def hello___penli():
-    return "<p>Merhaba Pelinsu</p>"
-
-
 @app.route("/api/wave_heigh")
 def calculateWaveHeight():
     cas = WaveHeight()
@@ -33,7 +28,6 @@ def calculateWaveHeightML():
 
 @app.route('/api/closure_depth', methods=['POST'])
 def closure_depth():
-    # data
     data = request.get_json()
     wave_height = float(data['wave_height'])
     wave_period = float(data['wave_period'])
@@ -58,5 +52,4 @@ def closure_depth():
     territory = Territory(coords, res['A'])
     result = territory.get_territory_matris()
     res['matris'] = result
-    # return response
     return {"data": res}
