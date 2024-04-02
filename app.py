@@ -34,6 +34,7 @@ def closure_depth():
     D = float(data['D'])
     dfifthy = float(data['dfifthy'])
     rho = float(data['rho'])
+    z = float(data['z'])
     # ClosureDepth class
     closureDepth = ClosureDepth({
         "wave_height": wave_height,
@@ -49,7 +50,7 @@ def closure_depth():
         [0, res['closure_depth'], 0]
     ]
 
-    territory = Territory(coords, res['A'])
+    territory = Territory(coords, res['A'], z)
     result = territory.get_territory_matris()
     res['matris'] = result
     return {"data": res}

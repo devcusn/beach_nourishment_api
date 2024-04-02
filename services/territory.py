@@ -1,9 +1,10 @@
 
 
 class Territory:
-    def __init__(self, coords, A):
+    def __init__(self, coords, A, z):
         self.coords = coords
         self.A = A
+        self.z = z
 
     def point_position_relative_to_line(self, point, y):
         y_on_line = -1 * self.A * pow(point[0], 2 / 3) + y
@@ -16,8 +17,8 @@ class Territory:
         else:
             return "On"
 
-    def generate_inside_coordinates(self, coordinates, y):
-        z_coord = -9
+    def generate_inside_coordinates(self, coordinates, y, z=10):
+        z_coord = z * -1
         c1 = coordinates[1]
         c2 = coordinates[2]
         coords = []
@@ -39,4 +40,4 @@ class Territory:
         return coords
 
     def get_territory_matris(self):
-        return self.generate_inside_coordinates(self.coords, self.coords[2][1])
+        return self.generate_inside_coordinates(self.coords, self.coords[2][1], self.z)
