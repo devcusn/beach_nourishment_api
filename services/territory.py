@@ -17,6 +17,16 @@ class Territory:
         else:
             return "On"
 
+    def below_or_above(self, coord, y2):
+        x = coord[0]
+        y = coord[1]
+        z = coord[2]
+        calc = self.point_position_relative_to_line([x, y], y2)
+        if calc == "Below" or calc == "On":
+            return [x, y, z * -1, "orange"]
+        else:
+            return [x, y, z * -1, "blue"]
+
     def generate_inside_coordinates(self, coordinates, y, z=10):
         z_coord = z * -1
         c1 = coordinates[1]
@@ -28,12 +38,8 @@ class Territory:
             i = 0
             while i < c1[0]:
                 j = 0
-                while j <= c2[1]:
-                    calc = self.point_position_relative_to_line([i, j], y)
-                    if calc == "Below" or calc == "On":
-                        coords.append([i, j, z, "orange"])
-                    else:
-                        coords.append([i, j, z, "blue"])
+                while j < c2[1]:
+                    coords.append(self.below_or_above([i, j, z], y))
                     j += inc_dec
                 i += inc_dec
             z -= inc_dec
