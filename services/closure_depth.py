@@ -34,9 +34,6 @@ class ClosureDepth:
             self.wave_height, self.wave_period))
 
         closure_depth_x = self.get_closure_depth_x(closure_depth, A)
-        print(A)
-        print(closure_depth)
-        print(closure_depth_x)
         return {
             "closure_depth": closure_depth,
             "x": closure_depth_x,

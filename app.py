@@ -34,7 +34,9 @@ def closure_depth():
     D = float(data['D'])
     dfifthy = float(data['dfifthy'])
     rho = float(data['rho'])
-    z = float(data['z'])
+    total_length = float(data['total_length'])
+    length_of_beach = float(data['length_of_beach'])
+    revetment = float(data['revetment'])
     # ClosureDepth class
     closureDepth = ClosureDepth({
         "wave_height": wave_height,
@@ -44,13 +46,31 @@ def closure_depth():
         "rho": rho,
     })
     res = closureDepth.res()
-    coords = [
+    coords = [[
         [0, 0, 0],
         [res['x'], 0, 0],
         [0, res['closure_depth'], 0]
-    ]
+    ], [
+        [10, 0, 50],
+        [res['x'], 0, 50],
+        [10, res['closure_depth'], 50]
+    ], [
+        [30, 0, 120],
+        [res['x'], 0, 120],
+        [30, res['closure_depth'], 120]
+    ],
+        [
+        [40, 0, 150],
+        [res['x'], 0, 150],
+        [40, res['closure_depth'], 150]
+    ]]
 
-    territory = Territory(coords, res['A'], z)
+    territory = Territory(coords, res['A'], total_length, length_of_beach)
     result = territory.get_territory_matris()
     res['matris'] = result
+    res['volume'] = 500
+    res['after_errosion'] = 52.44
+    res['beach_length'] = length_of_beach
+    res['total_length'] = total_length
+    res['revetment'] = revetment
     return {"data": res}
