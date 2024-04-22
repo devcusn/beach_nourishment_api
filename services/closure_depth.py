@@ -36,6 +36,6 @@ class ClosureDepth:
         closure_depth_x = self.get_closure_depth_x(closure_depth, A)
         return {
             "closure_depth": closure_depth,
-            "x": closure_depth_x,
+            "closure_depth_x": closure_depth_x,
             "A": A
         }

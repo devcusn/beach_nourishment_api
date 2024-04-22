@@ -49,24 +49,25 @@ def closure_depth():
     res = closureDepth.res()
     coords = [[
         [0, 0, 0],
-        [res['x'], 0, 0],
+        [res['closure_depth_x'], 0, 0],
         [0, res['closure_depth'], 0]
     ], [
         [10, 0, 50],
-        [res['x'], 0, 50],
+        [res['closure_depth_x'], 0, 50],
         [10, res['closure_depth'], 50]
     ], [
         [30, 0, 120],
-        [res['x'], 0, 120],
+        [res['closure_depth_x'], 0, 120],
         [30, res['closure_depth'], 120]
     ],
         [
         [40, 0, 150],
-        [res['x'], 0, 150],
+        [res['closure_depth_x'], 0, 150],
         [40, res['closure_depth'], 150]
     ]]
 
-    territory = Territory(coords, res['A'], total_length, length_of_beach)
+    territory = Territory(
+        coords, res['A'], total_length, length_of_beach)
     result = territory.get_territory_matris()
     res['matris'] = result
     res['volume'] = 500
@@ -74,6 +75,7 @@ def closure_depth():
     res['beach_length'] = length_of_beach
     res['total_length'] = total_length
     res['revetment'] = revetment
-    volume = Volume(res['A'], length_of_beach, total_length)
+    volume = Volume(res['A'], length_of_beach,
+                    total_length, res['closure_depth_x'])
     res['volume'] = volume.getVolume()
     return {"data": res}
