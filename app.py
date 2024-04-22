@@ -1,8 +1,9 @@
 from flask import Flask, request
 from services.territory import Territory
-from services.wave_height import WaveHeight
-from services.wave_height_ml import WaveHeightML
+from tests.wave_height import WaveHeight
+from tests.wave_height_ml import WaveHeightML
 from services.closure_depth import ClosureDepth
+from services.volume import Volume
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -73,4 +74,6 @@ def closure_depth():
     res['beach_length'] = length_of_beach
     res['total_length'] = total_length
     res['revetment'] = revetment
+    volume = Volume(res['A'], length_of_beach, total_length)
+    res['volume'] = volume.getVolume()
     return {"data": res}
