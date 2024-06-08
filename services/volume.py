@@ -2,12 +2,13 @@ import sympy as sp
 
 
 class Volume:
-    def __init__(self, A, length_of_beach, total_length, closure_depth_x):
+    def __init__(self, A, length_of_beach, total_length, closure_depth_x, revetment_position):
         self.init = True
         self.length_of_beach = length_of_beach
         self.total_length = total_length
         self.A = A
         self.closure_depth_x = closure_depth_x
+        self.revetment_position = revetment_position
 
     def integrate(self, start, end, A):
         y = sp.Symbol('y')
@@ -17,12 +18,20 @@ class Volume:
         return res
 
     def getVolume(self):
-        c1 = self.integrate(0, 233.8, self.A)-self.integrate(0, 146.4, self.A)
-        c1_c2 = self.integrate(0, 414.8,  self.A) - \
-            self.integrate(0, 327.4, self.A)
+        c1 = self.integrate(0, self.revetment_position +
+                            self.length_of_beach, self.A)-self.integrate(0, self.revetment_position, self.A)
+        c1_c2 = self.integrate(0, self.closure_depth_x,  self.A) - \
+            self.integrate(0, self.closure_depth_x -
+                           self.length_of_beach, self.A)
         c1_c2_c3 = self.integrate(0, self.closure_depth_x + self.length_of_beach, self.A) - \
             self.integrate(0,  self.closure_depth_x, self.A)
+        c2 = c1_c2 - c1
+        c3 = c1_c2_c3 - c1_c2
         c4 = self.length_of_beach
-        print(c1_c2_c3)
         total = (c1_c2_c3 + c4) * self.total_length
-        return float(total)
+        return {"volume": float(total), "detail": {
+            "c1": c1,
+            "c2": c2,
+            "c3": c3,
+            "c4": c4
+        }}

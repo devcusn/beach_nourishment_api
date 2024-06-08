@@ -15,7 +15,7 @@ class ClosureDepth:
         return ((24 * D * dfifthy) / (5 * rho * self.gravity**(3/2) * self.k**2))**(2/3)
 
     def get_closure_depth(self, h_s, t_m):
-        res = 2.28 * h_s - 68.5*((h_s**2)/(self.gravity * t_m ** 2))
+        res = 2.28 * h_s - 68.5*((h_s**2)/(self.gravity * (t_m ** 2)))
         return res
 
     def get_water_depth(self, A, y):
