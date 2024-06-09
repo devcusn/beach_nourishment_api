@@ -64,11 +64,11 @@ def closure_depth():
     res['total_length'] = total_length
     res['revetment'] = revetment_data
 
-    revetment = Revetment(revetment_data, res['A'])
+    revetment = Revetment(revetment_data, float(format(res['A'], ".2f")))
     res['revetment_position'] = revetment.get_position_of_revetment()
     volume = Volume(res['A'], length_of_beach,
                     total_length, res['closure_depth_x'], res['revetment_position'])
     volume_res = volume.getVolume()
     res['volume'] = volume_res['volume']
-    print(volume_res)
+    res['volume_detail'] = volume_res['detail']
     return {"data": res}

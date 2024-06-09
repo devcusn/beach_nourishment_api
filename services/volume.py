@@ -20,6 +20,7 @@ class Volume:
     def getVolume(self):
         c1 = self.integrate(0, self.revetment_position +
                             self.length_of_beach, self.A)-self.integrate(0, self.revetment_position, self.A)
+
         c1_c2 = self.integrate(0, self.closure_depth_x,  self.A) - \
             self.integrate(0, self.closure_depth_x -
                            self.length_of_beach, self.A)
@@ -30,8 +31,8 @@ class Volume:
         c4 = self.length_of_beach
         total = (c1_c2_c3 + c4) * self.total_length
         return {"volume": float(total), "detail": {
-            "c1": c1,
-            "c2": c2,
-            "c3": c3,
-            "c4": c4
+            "c1": float(c1),
+            "c2":  float(c2),
+            "c3":  float(c3),
+            "c4":  float(c4)
         }}
