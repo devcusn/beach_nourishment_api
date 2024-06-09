@@ -33,7 +33,8 @@ class ClosureDepth:
         closure_depth = abs(self.get_closure_depth(
             self.wave_height, self.wave_period))
 
-        closure_depth_x = self.get_closure_depth_x(closure_depth, A)
+        closure_depth_x = self.get_closure_depth_x(
+            closure_depth, float(format(A, ".2f")))
         return {
             "closure_depth": closure_depth,
             "closure_depth_x": closure_depth_x,
