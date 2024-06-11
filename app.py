@@ -2,7 +2,7 @@ from flask import Flask, request
 
 from services.closure_depth import ClosureDepth
 from services.volume import Volume
-from services.revetment import Revetment
+from services.sill import Revetment
 from services.territory import Territory
 from flask_cors import CORS
 app = Flask(__name__)
