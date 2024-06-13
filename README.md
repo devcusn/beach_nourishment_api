@@ -1,4 +1,5 @@
-# Flask API Setup and Run Instructions
+# Coastal Engineering Beach Nourishment API
+## Flask API Setup and Run Instructions
 
 This guide provides the steps required to set up and run the Flask API.
 
